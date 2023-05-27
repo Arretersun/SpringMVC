@@ -1,29 +1,32 @@
 package cn.edu.guet.service.impl;
 
-import cn.edu.guet.bean.User;
 import cn.edu.guet.common.ResponseData;
 import cn.edu.guet.dao.UserDao;
-import cn.edu.guet.dao.impl.UserDaoImpl;
 import cn.edu.guet.service.UserService;
 
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
     //依赖注入
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
-
     }
 
     @Override
-    public ResponseData saveUser(User user) {
-        int save = userDao.saveUser(user);
+    public ResponseData saveUser(Users user) {
+        int save =0;
+        try {
+            save = userDao.save(user);
+        }catch (SQLException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e){
+            e.printStackTrace();
+        }
         //判断是否保存成功
         if (save==1){
             return new ResponseData("保存成功",200);
         }
-        return new ResponseData("保存失败",400);
+        return ResponseData.fail("保存失败", 400);
         //return null;
     }
 

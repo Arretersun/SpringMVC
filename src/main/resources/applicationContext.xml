@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans>
-    <bean id="userController" class="cn.edu.guet.controller.UserController"><!--控制器-->
-        <property name="userService" ref="userService"></property><!--属性-->
+    <bean id="planDesignController" class="cn.edu.guet.controller.PlanDesignController">
+        <property name="planDesignService" ref="planDesignService"></property>
     </bean>
-    <bean id="userService" class="cn.edu.guet.service.impl.UserServiceImpl">
-        <property name="userDao" ref="userDao"></property>
+    <bean id="planDesignService" class="cn.edu.guet.service.impl.PlanDesignServiceImpl">
+    <property name="routeCableDao" ref="routeCableDao"></property>
     </bean>
+    <bean id="routeCableDao" class="cn.edu.guet.dao.impl.RouteDesignDaoImpl"></bean>
 
-    <bean id="userDao" class="cn.edu.guet.dao.impl.UserDaoImpl"></bean>
 
 </beans>
